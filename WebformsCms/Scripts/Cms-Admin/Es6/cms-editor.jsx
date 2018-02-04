@@ -19,7 +19,6 @@ export default class CmsEditor extends React.Component {
         })
 
         EventEmitter.subscribe("open-add-module", function({caller, menuId, moduleId, isEdit, isDelete}) {            
-            console.log({caller, menuId, moduleId, isEdit, isDelete});
             instance.openEditor()
             instance.setState({
                 open:true,                

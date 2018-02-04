@@ -37,6 +37,7 @@ export default class ModuleEditor extends React.Component {
             modules: [],
             search: ""
         }
+
     }
 
     componentDidMount(){
@@ -55,6 +56,10 @@ export default class ModuleEditor extends React.Component {
                 name :"Bild"
             }
         ]});
+        
+        if(!this.props.isDelete && !this.props.isEdit){
+            this.search.focus();
+        }
     }
 
     getModules(){
@@ -98,9 +103,14 @@ export default class ModuleEditor extends React.Component {
             
         }else if(this.props.isDelete){
             display = <div className="module-delete">
-                        <span>Wirklich löschen?</span>
-                        <button onClick={this.handleDeleteModule.bind(this)}>Ja</button>
-                        <button onClick={this.handleClose.bind(this)}>Nein</button>
+                        <div className="row">
+                            <span>Wirklich löschen?</span>
+                            <button onClick={this.handleDeleteModule.bind(this)}>Ja</button>
+                            <button onClick={this.handleClose.bind(this)}>Nein</button>
+                        </div>
+                        <div className="row">
+                        
+                        </div>
                       </div>
         }
         else{
