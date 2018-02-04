@@ -48,8 +48,8 @@ namespace WebformsCms
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/cms-admin").Include(
-                "~/Scripts/Cms-Admin/bundle.js",
-                "~/Scripts/Cms-Admin/common.js"
+                "~/Scripts/Cms-Admin/common.js",
+                "~/Scripts/Cms-Admin/bundle.js"                
             ));
 
           
