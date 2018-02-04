@@ -1,0 +1,190 @@
+﻿
+
+
+#cms-editor{
+    background:rgba(0,0,0,.9);
+    position: absolute;
+    left:-300px;
+    top:0;
+    height:100vh;
+    transition: all 400ms ease;
+    width:250px;    
+}
+
+#cms-editor.open{
+    left:0;
+}
+body{
+    transition:margin 400ms ease;
+}
+body.cms-editor-open{
+    margin-left: 350px;
+}
+
+#cms-editor .wrapper:after{content:'';display: block;clear:both}
+#cms-editor .wrapper{
+    padding: 15px 30px 0 30px;    
+    height: 100%;
+}
+
+#cms-editor .button.close{
+    display: inline-block;
+    width:40px;
+    height:40px;
+    position: absolute;
+    right:0px;
+    top:0;
+}
+
+
+#cms-editor .button.close:before{
+    content:'';
+    width:30px;
+    height:2px;
+    background:#fff;
+    display: block;
+    transform: rotateZ(-45deg);
+    position: absolute;
+    right:10px;
+    top:22px;
+}
+
+#cms-editor .button.close:after{
+    content:'';
+    display: block;
+    width:30px;
+    height:2px;
+    background:#fff;
+    transform: rotateZ(45deg);
+    position: absolute;
+    right:10px;
+    top:22px;
+}
+
+#cms-editor h1{
+    color:#fff;
+    font-size: 2rem;
+}
+
+#cms-editor .module-editor{
+    height:100%;
+}
+
+#cms-editor .module-editor .module-delete span{
+    color:#fff;
+    font-size:2rem;
+    display: block;
+    margin:0 0 15px 0;
+}
+#cms-editor .module-editor .module-delete button{
+    background: transparent;
+    color:#fff;
+    border: 1px solid #fff;
+    padding:15px;
+    width: calc(50% - 30px); 
+    cursor: pointer;   
+    margin:0 15px 0 0;
+    transition: all 400ms ease;
+}
+
+#cms-editor .module-editor .module-delete button:hover{
+    background: #fff;
+    color:#000;
+}
+
+
+#cms-editor .module-button{
+    width:100%;
+    border: 1px solid #fff;
+    display: block;
+    float:left;
+    margin:0 0 15px 0;
+    position:relative;
+    color: #ffF;
+    transition: 400ms ease;
+    cursor: pointer;
+}
+#cms-editor .module-button:last-child{margin-bottom:0;}
+
+#cms-editor .module-button .button-inner{
+    padding-top:100%;
+}
+
+#cms-editor .module-button label{
+    position: absolute;
+    top: 40%;
+    left:0;
+    right:0;
+    text-align: center;
+    display: block;
+    color:#fff;
+    transition: 400ms ease;
+    cursor: pointer;
+}
+
+#cms-editor .module-button:hover{
+    background: #fff;
+}
+
+#cms-editor .module-button:hover label{
+    color: #000;
+}
+
+#cms-editor .scroll{
+    min-height: calc(100% - 70pX);
+    max-height: calc(100vh - 100px);
+    overflow: hidden;
+    overflow-y: scroll;
+    width: 100%;
+    box-sizing: content-box;
+    padding-right: 30px;
+    margin:30px 0 0 0;
+}
+
+#cms-editor .scroll .empty-message{
+    color: #fff;
+}
+
+#cms-editor .name-filter{
+    background: transparent;
+    color: #fff!important;
+    font-size: 1.2rem;
+    font-weight: bold;    
+    display: block;
+    width: calc(100% - 30px);
+    border: none;
+    border-bottom: 1px solid #fff;
+}
+
+#cms-editor .menu-editor:after{content:'';display: block;clear:both}
+#cms-editor .menu-editor{
+    padding: 15px 30px 0 30px;    
+    height: 100%;
+}
+
+
+#cms-editor .menu-editor fieldset{
+    margin:30px 0 0 0;
+}
+
+#cms-editor .menu-editor fieldset label{
+    color: #fff;
+    display: block;
+    margin:0 0 4px 0;
+    font-size: 1.2rem;
+}
+
+
+#cms-editor .menu-editor fieldset input[type='text']{
+    width:100%;
+    display: block;    
+    margin:0 0 15px 0;
+}
+
+
+
+#cms-editor .menu-editor fieldset input[type='checkbox']{    
+    display: inline-block;    
+    margin:0 0 15px 0;
+}
+

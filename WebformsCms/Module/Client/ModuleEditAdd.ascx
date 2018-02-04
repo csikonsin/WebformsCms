@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ModuleEditAdd.ascx.cs" Inherits="WebformsCms.Module.Client.ModuleEditAdd" %>
+<div class="module-editadd-root" id="editadd" runat="server"></div>

@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MenuAdd.ascx.cs" Inherits="WebformsCms.Module.Client.MenuAdd" %>
+<div class="menu-add-root" data-parentmenuid="<%=ParentMenuId %>" data-controlid="<%= ParentControlId %>"></div>
