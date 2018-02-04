@@ -19979,7 +19979,6 @@ var CmsEditor = function (_React$Component) {
                 isEdit = _ref2.isEdit,
                 isDelete = _ref2.isDelete;
 
-            console.log({ caller: caller, menuId: menuId, moduleId: moduleId, isEdit: isEdit, isDelete: isDelete });
             instance.openEditor();
             instance.setState({
                 open: true,
@@ -20352,6 +20351,7 @@ var ModuleEditor = function (_React$Component2) {
             modules: [],
             search: ""
         };
+
         return _this2;
     }
 
@@ -20369,6 +20369,10 @@ var ModuleEditor = function (_React$Component2) {
                     type: 2,
                     name: "Bild"
                 }] });
+
+            if (!this.props.isDelete && !this.props.isEdit) {
+                this.search.focus();
+            }
         }
     }, {
         key: "getModules",
@@ -20426,20 +20430,25 @@ var ModuleEditor = function (_React$Component2) {
                     "div",
                     { className: "module-delete" },
                     _react2.default.createElement(
-                        "span",
-                        null,
-                        "Wirklich l\xF6schen?"
+                        "div",
+                        { className: "row" },
+                        _react2.default.createElement(
+                            "span",
+                            null,
+                            "Wirklich l\xF6schen?"
+                        ),
+                        _react2.default.createElement(
+                            "button",
+                            { onClick: this.handleDeleteModule.bind(this) },
+                            "Ja"
+                        ),
+                        _react2.default.createElement(
+                            "button",
+                            { onClick: this.handleClose.bind(this) },
+                            "Nein"
+                        )
                     ),
-                    _react2.default.createElement(
-                        "button",
-                        { onClick: this.handleDeleteModule.bind(this) },
-                        "Ja"
-                    ),
-                    _react2.default.createElement(
-                        "button",
-                        { onClick: this.handleClose.bind(this) },
-                        "Nein"
-                    )
+                    _react2.default.createElement("div", { className: "row" })
                 );
             } else {
                 display = _react2.default.createElement(
