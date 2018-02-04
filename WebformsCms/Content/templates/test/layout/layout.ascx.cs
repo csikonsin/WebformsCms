@@ -14,5 +14,10 @@ namespace WebformsCms.Content.templates.layout
         {
 
         }
+
+        public override void Initialize(bool serverRendering = false)
+        {
+        }
+
     }
 }

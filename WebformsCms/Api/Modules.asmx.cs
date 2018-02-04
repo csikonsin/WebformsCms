@@ -81,16 +81,23 @@ namespace WebformsCms.Api
                 var single = (Module.SingleModule)DefaultModuleFactory.GetControl(module, "~/Module/SingleModule.ascx");
 
                 single.Control = control;
-                single.LoadPlaceholders();
-                var commands = (PlaceHolder)single.FindControl("commands");
-                if (commands != null && commands.Controls.Count>0)
+
+                single.Initialize(true);
+                var children = ModulesHelper.FlattenChildren(single);
+
+                var enumerator = children.GetEnumerator();
+                while (enumerator.MoveNext())
                 {
-                    var editAdd = (Module.Client.ModuleEditAdd)commands.Controls[0];
-                    if (editAdd != null)
+                    var child = enumerator.Current;
+
+                    if(child is ModuleUserControl)
                     {
-                        editAdd.InitializeAttributes(true);
-                    }
+                        var moduleChild = (ModuleUserControl)child;
+                        moduleChild.Initialize(true);
+                    }                   
+
                 }
+
                 ret = RenderControlToHtml(single);
             }
             catch (Exception ex)

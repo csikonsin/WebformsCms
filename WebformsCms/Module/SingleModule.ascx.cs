@@ -13,17 +13,7 @@ namespace WebformsCms.Module
         public ModuleUserControl Control { get; set; }
         public bool Root { get; set; } = false;
 
-        public SingleModule()
-        {
-
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            LoadPlaceholders();
-        }
-
-        public void LoadPlaceholders()
+        public override void Initialize(bool serverRendering = false)
         {
             ph.Controls.Add(Control);
 
@@ -36,5 +26,11 @@ namespace WebformsCms.Module
             c.Data = Control.Data;
             commands.Controls.Add(c);
         }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Initialize();
+        }
+
     }
 }

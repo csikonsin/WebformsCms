@@ -14,5 +14,10 @@ namespace WebformsCms.Module.Image
         {
 
         }
+
+        public override void Initialize(bool serverRendering = false)
+        {
+            
+        }
     }
 }

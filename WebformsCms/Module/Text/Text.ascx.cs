@@ -9,5 +9,10 @@ namespace WebformsCms.Module.Text
         {
 
         }
+
+        public override void Initialize(bool serverRendering = false)
+        {
+            
+        }
     }
 }

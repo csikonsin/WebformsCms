@@ -14,5 +14,9 @@ namespace WebformsCms.Modules.Heading
         {
 
         }
+
+        public override void Initialize(bool serverRendering = false)
+        {            
+        }
     }
 }

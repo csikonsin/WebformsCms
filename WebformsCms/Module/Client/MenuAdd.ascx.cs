@@ -12,9 +12,15 @@ namespace WebformsCms.Module.Client
     {
         public string ParentControlId { get; set; }
         public int ParentMenuId { get; set; }
+
+        public override void Initialize(bool serverRendering = false)
+        {
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+
     }
 }

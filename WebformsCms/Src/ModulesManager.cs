@@ -194,8 +194,12 @@ namespace WebformsCms.Src
     }
 
 
-    public class ModuleUserControl : UserControl
+
+    public abstract class ModuleUserControl : UserControl
     {
         public Domain.Modules Data { get; set; }
+
+        public abstract void Initialize(bool serverRendering = false);
+      
     }
 }

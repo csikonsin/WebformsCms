@@ -12,12 +12,12 @@ namespace WebformsCms.Module.Client
     {        
         protected void Page_Load(object sender, EventArgs e)
         {
-            InitializeAttributes();
+            Initialize();
         }
 
-        public void InitializeAttributes(bool dynamicCreated = false)
+        public override void Initialize(bool serverRendering = false)
         {
-            if (dynamicCreated)
+            if (serverRendering)
             {
                 editadd.Attributes["class"] += " notloaded";
             }

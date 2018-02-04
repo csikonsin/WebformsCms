@@ -507,6 +507,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\BundleHelpers.cs" />
     <Compile Include="Src\MenusManager.cs" />
+    <Compile Include="Src\ModulesHelper.cs" />
     <Compile Include="Src\ModulesManager.cs" />
     <Compile Include="Src\Authentication.cs" />
     <Compile Include="Src\Settings.cs" />
