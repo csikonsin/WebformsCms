@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI.WebControls;
 using WebformsCms.Src;
 
 namespace WebformsCms.Api
 {
+
+
     /// <summary>
     /// Summary description for Modules
     /// </summary>
@@ -17,6 +21,38 @@ namespace WebformsCms.Api
     [System.Web.Script.Services.ScriptService]
     public class Modules : System.Web.Services.WebService
     {
+        protected class ModuleTypesModel
+        {
+            public string name { get; set; }
+
+            public int type { get; set; }
+        }
+
+
+        [ScriptMethod(UseHttpGet = true, ResponseFormat =ResponseFormat.Json)]
+        [WebMethod]
+        public void GetModuleTypes()
+        {
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+
+            var types = ModulesManager.GetModuleTypes();
+
+            var t = new List<ModuleTypesModel>();
+
+            var en = types.GetEnumerator();
+            while (en.MoveNext())
+            {
+                t.Add(new ModuleTypesModel()
+                {
+                    name = en.Current.Key,
+                    type = en.Current.Value
+                });
+            }
+
+            var serializer = new JavaScriptSerializer();
+            Context.Response.Write(serializer.Serialize(t));
+        }
 
         [WebMethod]
         public string NewModule(int menuId, int moduleType, int parentId)
@@ -76,7 +112,7 @@ namespace WebformsCms.Api
                     var repo = new Data.ModulesRepository(session.UnitOfWork);
                     module = repo.GetSingle(moduleId);
                 }
-                var control = ModulesManager.GetControlFromModuleData(module);
+                var control = DefaultModuleFactory.GetControlFromModuleData(module);
 
                 var single = (Module.SingleModule)DefaultModuleFactory.GetControl(module, "~/Module/SingleModule.ascx");
 

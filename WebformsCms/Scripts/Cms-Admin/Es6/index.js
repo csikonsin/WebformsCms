@@ -4,8 +4,7 @@ import ModuleEditAdd from "./module-editadd.jsx"
 import CmsEditor from "./cms-editor.jsx"
 import MenuAdd from "./menu-add.jsx"
 import EventsEmitter from "./event-emitter"
-
-
+import AdminEditToggle from "./admin-edit-toggle.jsx"
 
 let loadEditadd = function(loadNew){
 
@@ -43,3 +42,7 @@ loadEditadd()
 
 
 ReactDOM.render(<CmsEditor/>, document.getElementById("module-editor-root"))
+
+var editRoot = document.getElementById("admin-edit-toggle-root");
+var isEdit = (editRoot.getAttribute("data-isedit").toLowerCase() == "true");
+ReactDOM.render(<AdminEditToggle isEdit={isEdit}/>, editRoot)

@@ -70,7 +70,7 @@ namespace WebformsCms.Src
 
                 foreach(var m in menus)
                 {
-                    if(rawUrl == "/" && m.Homepage.HasValue && m.Homepage.Value)
+                    if((rawUrl == "/" || rawUrl == "/Default") && m.Homepage.HasValue && m.Homepage.Value)
                     {
                         menu = m;
                         break;

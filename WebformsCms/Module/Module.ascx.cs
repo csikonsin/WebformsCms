@@ -26,9 +26,15 @@ namespace WebformsCms.Module
             {
                 var c = (ModuleUserControl)LoadControl($"~/Content/templates/{WebSettings.Instance.Settings.Name}/layout/layout.ascx");
                 repData.Add(c);
-                Editor.Controls.Add(DefaultModuleFactory.GetControl(null, "~/Module/Client/ModuleEditor.ascx"));
+                Cms.Controls.Add(DefaultModuleFactory.GetControl(null, "~/Module/Client/ModuleEditor.ascx"));
                 repModules.DataSource = repData;
                 repModules.DataBind();
+
+                if (Authentication.IsAdmin)
+                {
+                    Cms.Controls.Add((Client.AdminEditToggle)DefaultModuleFactory.GetControl(null, "~/Module/Client/AdminEditToggle.ascx"));
+                }
+
                 return;
             }
 
@@ -37,22 +43,22 @@ namespace WebformsCms.Module
 
             if (menuId == 0)
             {
-                Editor.Controls.Add(new Literal() { Text = "You need to create a menu first!" });
+                Cms.Controls.Add(new Literal() { Text = "You need to create a menu first!" });
                 return;
             }
-
 
             var manager = new ModulesManager();
 
             var controls = manager.GetMenuModules(menuId, ModuleId);
-
 
             foreach (var control in controls)
             {
                 repData.Add(control);
             }
 
-            if (Authentication.Instance.IsAdminEdit())
+         
+
+            if (Authentication.Instance.IsAdminEdit)
             {
                 var c = (Client.ModuleEditAdd)DefaultModuleFactory.GetControl(null, "~/Module/Client/ModuleEditAdd.ascx");
                 c.Data = new Domain.Modules() {

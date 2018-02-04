@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminEditToggle.ascx.cs" Inherits="WebformsCms.Module.Client.AdminEditToggle" %>
+<div id="admin-edit-toggle-root" data-isedit="<%=IsEdit %>"></div>

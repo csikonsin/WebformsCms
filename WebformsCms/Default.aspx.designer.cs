@@ -22,15 +22,6 @@ namespace WebformsCms {
         protected global::System.Web.UI.WebControls.PlaceHolder DynamicStyles;
         
         /// <summary>
-        /// ScriptManager control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager;
-        
-        /// <summary>
         /// DynamicScripts control.
         /// </summary>
         /// <remarks>

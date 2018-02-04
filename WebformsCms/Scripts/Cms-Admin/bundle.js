@@ -1678,6 +1678,10 @@ var _eventEmitter = __webpack_require__(16);
 
 var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
 
+var _adminEditToggle = __webpack_require__(62);
+
+var _adminEditToggle2 = _interopRequireDefault(_adminEditToggle);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var loadEditadd = function loadEditadd(loadNew) {
@@ -1712,6 +1716,10 @@ document.querySelectorAll(".menu-add-root").forEach(function (element) {
 });
 
 _reactDom2.default.render(_react2.default.createElement(_cmsEditor2.default, null), document.getElementById("module-editor-root"));
+
+var editRoot = document.getElementById("admin-edit-toggle-root");
+var isEdit = editRoot.getAttribute("data-isedit").toLowerCase() == "true";
+_reactDom2.default.render(_react2.default.createElement(_adminEditToggle2.default, { isEdit: isEdit }), editRoot);
 
 /***/ }),
 /* 24 */
@@ -20358,17 +20366,13 @@ var ModuleEditor = function (_React$Component2) {
     _createClass(ModuleEditor, [{
         key: "componentDidMount",
         value: function componentDidMount() {
-            this.setState({
-                modules: [{
-                    type: 0,
-                    name: "Text"
-                }, {
-                    type: 1,
-                    name: "Überschrift"
-                }, {
-                    type: 2,
-                    name: "Bild"
-                }] });
+            var _this3 = this;
+
+            _axios2.default.post("/Api/Modules.asmx/GetModuleTypes").then(function (res) {
+                _this3.setState({ modules: res.data });
+            }).catch(function (err) {
+                console.error(err);
+            });
 
             if (!this.props.isDelete && !this.props.isEdit) {
                 this.search.focus();
@@ -20377,10 +20381,10 @@ var ModuleEditor = function (_React$Component2) {
     }, {
         key: "getModules",
         value: function getModules() {
-            var _this3 = this;
+            var _this4 = this;
 
             return this.state.modules.filter(function (module) {
-                return module.name.indexOf(_this3.state.search) > -1;
+                return module.name.indexOf(_this4.state.search) > -1;
             });
         }
     }, {
@@ -20410,10 +20414,10 @@ var ModuleEditor = function (_React$Component2) {
     }, {
         key: "render",
         value: function render() {
-            var _this4 = this;
+            var _this5 = this;
 
             var list = this.getModules().map(function (module) {
-                return _react2.default.createElement(ModuleButton, { type: module.type, name: module.name, key: module.type, caller: _this4.props.caller, menuId: _this4.props.menuId, moduleId: _this4.props.moduleId });
+                return _react2.default.createElement(ModuleButton, { type: module.type, name: module.name, key: module.type, caller: _this5.props.caller, menuId: _this5.props.menuId, moduleId: _this5.props.moduleId });
             });
             if (list.length === 0) {
                 list = _react2.default.createElement(
@@ -20455,7 +20459,7 @@ var ModuleEditor = function (_React$Component2) {
                     "div",
                     { className: "module-list" },
                     _react2.default.createElement("input", { ref: function ref(search) {
-                            return _this4.search = search;
+                            return _this5.search = search;
                         }, className: "name-filter", type: "search", onChange: this.handleSearchChange.bind(this), placeholder: "Modul suchen" }),
                     _react2.default.createElement(
                         "div",
@@ -20664,6 +20668,80 @@ var ModuleEditAdd = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = ModuleEditAdd;
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(37);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AdminEditToggle = function (_React$Component) {
+    _inherits(AdminEditToggle, _React$Component);
+
+    function AdminEditToggle(props) {
+        _classCallCheck(this, AdminEditToggle);
+
+        var _this = _possibleConstructorReturn(this, (AdminEditToggle.__proto__ || Object.getPrototypeOf(AdminEditToggle)).call(this, props));
+
+        _this.state = {};
+        return _this;
+    }
+
+    _createClass(AdminEditToggle, [{
+        key: "render",
+        value: function render() {
+            var wrapperClass = "wrapper";
+            if (this.props.isEdit) {
+                wrapperClass += " active";
+            }
+
+            return _react2.default.createElement(
+                "div",
+                { className: wrapperClass, onClick: this.handleToggle.bind(this) },
+                _react2.default.createElement(
+                    "span",
+                    null,
+                    "Toggle Edit"
+                ),
+                _react2.default.createElement("i", { className: "fas fa-edit" })
+            );
+        }
+    }, {
+        key: "handleToggle",
+        value: function handleToggle() {
+            _axios2.default.post("/Api/Cms.asmx/ToggleEdit").then(function (res) {
+                document.location.reload();
+            }).catch(function (e) {});
+        }
+    }]);
+
+    return AdminEditToggle;
+}(_react2.default.Component);
+
+exports.default = AdminEditToggle;
 
 /***/ })
 /******/ ]);

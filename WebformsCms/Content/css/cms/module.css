@@ -188,3 +188,49 @@ body.cms-editor-open{
     margin:0 0 15px 0;
 }
 
+
+
+
+#admin-edit-toggle-root{
+    position: fixed;
+    right:0;
+    top:0;
+    background:#eee;
+    cursor: pointer;    
+    
+}
+#admin-edit-toggle-root .wrapper.active,
+#admin-edit-toggle-root:hover .wrapper
+{
+    opacity: 1;
+}
+
+#admin-edit-toggle-root .wrapper{
+    height:100%;
+    padding: 5px;
+    opacity: .5;
+    transition: all 400ms ease;
+}
+
+#admin-edit-toggle-root .wrapper:before{
+    content:'';
+    display: inline-block;
+    vertical-align: middle;
+    height:100%;
+}
+
+#admin-edit-toggle-root span{
+    font-weight: bold;
+    font-size: .9rem;
+    margin: 0 10px 0 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+
+#admin-edit-toggle-root i{
+    font-size: 1.7rem;
+    color:#666;
+    display: inline-block;
+    vertical-align: middle;
+}

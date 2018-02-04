@@ -57,39 +57,32 @@ namespace WebformsCms
         private void AddScripts()
         {
             AddScriptsBundle("~/bundles/cms");
-            if (Authentication.Instance.IsAdminEdit())
+            if (Authentication.Instance.IsAdmin)
             {
                 AddScriptsBundle("~/bundles/cms-admin");
             }
             AddScriptsBundle("~/bundles/modernizr");
         }
-
         private void AddScriptsBundle(string name)
         {
             DynamicScripts.Controls.Add(new Literal() { Text = HttpUtility.HtmlEncode(Scripts.Render(name)) });
         }
-
         private void AddStyles()
         {
             var themePath = $"~/bundles/{WebSettings.Instance.Settings.Name}/css";            
 
             AddStylesBundle(themePath);
 
-            if (Authentication.Instance.IsAdminEdit())
+            if (Authentication.Instance.IsAdmin)
             {
                 AddStylesBundle("~/bundles/cms/css");
             }
 
         }
-
         private void AddStylesBundle(string path)
         {
             DynamicStyles.Controls.Add(new Literal() { Text = HttpUtility.HtmlEncode(Styles.Render(path)) });
-
         }
-
-
-
         protected void Page_PreLoad(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -111,7 +104,6 @@ namespace WebformsCms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

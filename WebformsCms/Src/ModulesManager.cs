@@ -5,6 +5,8 @@ using WebformsCms.Data;
 using WebformsCms.Modules.Heading;
 using WebformsCms.Module.Text;
 using WebformsCms.Module.Image;
+using WebformsCms.Module.Login;
+using WebformsCms.Module.Register;
 
 namespace WebformsCms.Src
 {
@@ -12,8 +14,11 @@ namespace WebformsCms.Src
     {
         Text = 0,
         Heading = 1,
-        Image = 2
+        Image = 2,
+        Login = 3,
+        Register = 4
     }
+
 
     public interface IModulesManager
     {
@@ -23,6 +28,21 @@ namespace WebformsCms.Src
 
     public class ModulesManager : IModulesManager
     {
+        public static Dictionary<string, int> GetModuleTypes()
+        {
+            var types = new Dictionary<string,int>();
+
+            var values = Enum.GetValues(typeof(ModuleType));
+
+            foreach(int value in values)
+            {
+                var type = (ModuleType)value;
+                types.Add(type.ToString(), value);
+            }
+
+            return types;
+        }
+
         private int GetNextPosition(int menuId, int parentId)
         {
             int position = 100;
@@ -111,88 +131,13 @@ namespace WebformsCms.Src
                     int moduleParentId = 0;
                     int.TryParse(Convert.ToString(module.ParentId), out moduleParentId);
                     if (moduleParentId != parentId) continue;
-                    var control = GetControlFromModuleData(module);
+                    var control = DefaultModuleFactory.GetControlFromModuleData(module);
                     if (control != null) controls.Add(control);
                 }
-
             }
             return controls;
         }
-
-        public static ModuleUserControl GetControlFromModuleData(Domain.Modules module)
-        {
-            var moduleType = (ModuleType)module.ModuleType;
-
-            IModuleFactory<ModuleUserControl> factory = null;
-
-            switch (moduleType)
-            {
-                case ModuleType.Text:
-                    factory = new TextFactory();
-                    break;
-                case ModuleType.Heading:
-                    factory = new HeadingFactory();
-                    break;
-                case ModuleType.Image:
-                    factory = new ImageFactory();
-                    break;
-                default:
-                    throw new Exception("Unkown module type!");
-            }
-
-            return factory?.GetControl(module);
-        }
     }
-
-    public interface IModuleFactory<out T> where T: ModuleUserControl
-    {
-        T GetControl(Domain.Modules module);
-    }
-
-    public static class DefaultModuleFactory
-    {
-        public static ModuleUserControl GetControl(Domain.Modules module, string virtualPath)
-        {
-            var userControl = new UserControl();
-            var control = (ModuleUserControl)userControl.LoadControl(virtualPath);
-            control.Data = module;
-            return control;
-        }
-    }
-
-    public class HeadingFactory : IModuleFactory<Heading>
-    {
-        public Heading GetControl(Domain.Modules module)
-        {
-            var userControl = new UserControl();
-            var control = (Heading)userControl.LoadControl("~/Module/Heading/Heading.ascx");
-            control.Data = module;
-            return control;
-        }
-    }
-
-    public class TextFactory : IModuleFactory<Text>
-    {
-        public Text GetControl(Domain.Modules module)
-        {
-            var userControl = new UserControl();
-            var control = (Text)userControl.LoadControl("~/Module/Text/Text.ascx");
-            control.Data = module;
-            return control;
-        }
-    }
-
-    public class ImageFactory : IModuleFactory<WebformsCms.Module.Image.Image>
-    {
-        public Image GetControl(Domain.Modules module)
-        {
-            var userControl = new UserControl();
-            var control = (Image)userControl.LoadControl("~/Module/Image/Image.ascx");
-            control.Data = module;
-            return control;
-        }
-    }
-
 
 
     public abstract class ModuleUserControl : UserControl

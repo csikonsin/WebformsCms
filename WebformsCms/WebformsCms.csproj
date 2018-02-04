@@ -222,6 +222,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="Api\Cms.asmx" />
     <Content Include="Api\Menus.asmx" />
     <Content Include="Api\Modules.asmx" />
     <Content Include="Config\webConnections.config" />
@@ -239,21 +240,21 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Module\Client\AdminEditToggle.ascx" />
     <Content Include="Module\Client\MenuAdd.ascx" />
     <Content Include="Module\Client\ModuleEditAdd.ascx" />
     <Content Include="Module\Client\ModuleEditor.ascx" />
     <Content Include="Module\Heading\Heading.ascx" />
     <Content Include="Module\Image\Image.ascx" />
+    <Content Include="Module\Login\Login.ascx" />
     <Content Include="Module\Menu\Menu.ascx" />
+    <Content Include="Module\Register\Register.ascx" />
     <Content Include="Module\SingleModule.ascx" />
     <Content Include="Module\Text\Text.ascx" />
     <Content Include="Module\Module.ascx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
-    <Content Include="Scripts\babel.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Cms-Admin\common.js" />
     <Content Include="Scripts\Cms-Admin\Es6\event-emitter.js" />
     <Content Include="Scripts\Cms\common.js" />
@@ -263,10 +264,6 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\react-dom.js" />
-    <Content Include="Scripts\react-dom.min.js" />
-    <Content Include="Scripts\react.js" />
-    <Content Include="Scripts\react.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
@@ -274,17 +271,17 @@
     <Content Include="Scripts\WebForms\GridView.js" />
     <Content Include="Scripts\WebForms\Menu.js" />
     <Content Include="Scripts\WebForms\MenuStandards.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax_\MicrosoftAjaxWebServices.js" />
     <Content Include="Scripts\WebForms\SmartNav.js" />
     <Content Include="Scripts\WebForms\TreeView.js" />
     <Content Include="Scripts\WebForms\WebForms.js" />
@@ -411,6 +408,10 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Api\Cms.asmx.cs">
+      <DependentUpon>Cms.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Api\Menus.asmx.cs">
       <DependentUpon>Menus.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -441,6 +442,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Module\Client\AdminEditToggle.ascx.cs">
+      <DependentUpon>AdminEditToggle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\Client\AdminEditToggle.ascx.designer.cs">
+      <DependentUpon>AdminEditToggle.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Module\Client\MenuAdd.ascx.cs">
       <DependentUpon>MenuAdd.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -476,12 +484,26 @@
     <Compile Include="Module\Image\Image.ascx.designer.cs">
       <DependentUpon>Image.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Module\Login\Login.ascx.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\Login\Login.ascx.designer.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Module\Menu\Menu.ascx.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Module\Menu\Menu.ascx.designer.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\Register\Register.ascx.cs">
+      <DependentUpon>Register.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\Register\Register.ascx.designer.cs">
+      <DependentUpon>Register.ascx</DependentUpon>
     </Compile>
     <Compile Include="Module\SingleModule.ascx.cs">
       <DependentUpon>SingleModule.ascx</DependentUpon>
@@ -507,6 +529,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\BundleHelpers.cs" />
     <Compile Include="Src\MenusManager.cs" />
+    <Compile Include="Src\ModulesFactories.cs" />
     <Compile Include="Src\ModulesHelper.cs" />
     <Compile Include="Src\ModulesManager.cs" />
     <Compile Include="Src\Authentication.cs" />

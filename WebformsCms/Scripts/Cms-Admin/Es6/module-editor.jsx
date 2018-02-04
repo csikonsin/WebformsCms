@@ -41,21 +41,12 @@ export default class ModuleEditor extends React.Component {
     }
 
     componentDidMount(){
-        this.setState({
-        modules: [
-            {
-                type: 0,
-                name: "Text"
-            },
-            {
-                type: 1,
-                name: "Überschrift"
-            },
-            {
-                type: 2,
-                name :"Bild"
-            }
-        ]});
+
+        axios.post("/Api/Modules.asmx/GetModuleTypes").then((res) => {
+            this.setState({ modules: res.data});
+        }).catch((err)=>{
+            console.error(err);
+        });    
         
         if(!this.props.isDelete && !this.props.isEdit){
             this.search.focus();

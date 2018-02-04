@@ -17,7 +17,7 @@ namespace WebformsCms.Module
         {
             ph.Controls.Add(Control);
 
-            if (!Authentication.Instance.IsAdminEdit() || Root)
+            if (!Authentication.Instance.IsAdminEdit || Root)
             {
                 return;
             }

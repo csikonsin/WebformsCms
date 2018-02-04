@@ -38,7 +38,7 @@ namespace WebformsCms.Module.Menu
        
             var data = (Domain.Menus)e.Item.DataItem;
 
-            if (Authentication.Instance.IsAdminEdit() && data.ParentId == null)
+            if (Authentication.Instance.IsAdminEdit && data.ParentId == null)
             {
                 var anchorPh = (PlaceHolder)e.Item.FindControl("anchorPh");
                 if (anchorPh == null) return;
