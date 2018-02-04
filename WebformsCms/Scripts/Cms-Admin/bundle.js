@@ -1674,20 +1674,41 @@ var _menuAdd = __webpack_require__(57);
 
 var _menuAdd2 = _interopRequireDefault(_menuAdd);
 
+var _eventEmitter = __webpack_require__(16);
+
+var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-document.querySelectorAll(".module-editadd-root").forEach(function (element) {
-   var moduleId = element.getAttribute("data-moduleid");
-   var menuId = element.getAttribute("data-menuid");
-   var moduleType = element.getAttribute("data-moduletype");
-   var parentModuleId = element.getAttribute("data-parentmoduleid");
-   _reactDom2.default.render(_react2.default.createElement(_moduleEditadd2.default, { moduleId: moduleId, menuId: menuId, moduleType: moduleType, parentModuleId: parentModuleId }), element);
+var loadEditadd = function loadEditadd(loadNew) {
+
+    var query = ".module-editadd-root";
+    if (loadNew) {
+        query += ".notloaded";
+    }
+
+    document.querySelectorAll(query).forEach(function (element) {
+        var moduleId = element.getAttribute("data-moduleid");
+        var menuId = element.getAttribute("data-menuid");
+        var moduleType = element.getAttribute("data-moduletype");
+        var parentModuleId = element.getAttribute("data-parentmoduleid");
+        _reactDom2.default.render(_react2.default.createElement(_moduleEditadd2.default, { moduleId: moduleId, menuId: menuId, moduleType: moduleType, parentModuleId: parentModuleId }), element);
+
+        if (loadNew) {
+            element.className = element.className.replace(" notloaded", "");
+        }
+    });
+};
+loadEditadd();
+
+_eventEmitter2.default.subscribe("load-new-editadd", function () {
+    loadEditadd(true);
 });
 
 document.querySelectorAll(".menu-add-root").forEach(function (element) {
-   var menuControlId = element.getAttribute("data-controlid");
-   var parentMenuId = element.getAttribute("data-parentmenuid");
-   _reactDom2.default.render(_react2.default.createElement(_menuAdd2.default, { parentControlId: menuControlId, parentMenuId: parentMenuId }), element);
+    var menuControlId = element.getAttribute("data-controlid");
+    var parentMenuId = element.getAttribute("data-parentmenuid");
+    _reactDom2.default.render(_react2.default.createElement(_menuAdd2.default, { parentControlId: menuControlId, parentMenuId: parentMenuId }), element);
 });
 
 _reactDom2.default.render(_react2.default.createElement(_cmsEditor2.default, null), document.getElementById("module-editor-root"));
@@ -20598,14 +20619,18 @@ var ModuleEditAdd = function (_React$Component) {
     }, {
         key: "addModule",
         value: function addModule(type, menuId, moduleId) {
+
+            var instance = this;
+
             _axios2.default.post("/api/Modules.asmx/NewModule", {
                 menuId: menuId,
                 moduleType: type,
                 parentId: moduleId
             }).then(function (resp) {
-                //this.wrapper.ownerDocument.location.reload();
+                instance.wrapper.parentElement.insertAdjacentHTML("beforebegin", resp.data.d);
+                _eventEmitter2.default.dispatch("load-new-editadd");
             }).catch(function (error) {
-                console.error("Error adding module!");
+                console.error("Error adding module!", error);
             });
         }
     }, {

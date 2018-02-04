@@ -235,10 +235,6 @@
     <Content Include="Content\css\test\page.css" />
     <Content Include="Content\templates\test\layout\layout.ascx" />
     <None Include="Content\templates\test\layout\mainfest.json" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -249,6 +245,7 @@
     <Content Include="Module\Heading\Heading.ascx" />
     <Content Include="Module\Image\Image.ascx" />
     <Content Include="Module\Menu\Menu.ascx" />
+    <Content Include="Module\SingleModule.ascx" />
     <Content Include="Module\Text\Text.ascx" />
     <Content Include="Module\Module.ascx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -485,6 +482,13 @@
     </Compile>
     <Compile Include="Module\Menu\Menu.ascx.designer.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\SingleModule.ascx.cs">
+      <DependentUpon>SingleModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\SingleModule.ascx.designer.cs">
+      <DependentUpon>SingleModule.ascx</DependentUpon>
     </Compile>
     <Compile Include="Module\Text\Text.ascx.cs">
       <DependentUpon>Text.ascx</DependentUpon>

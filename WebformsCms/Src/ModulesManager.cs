@@ -18,7 +18,7 @@ namespace WebformsCms.Src
     public interface IModulesManager
     {
         List<ModuleUserControl> GetMenuModules(int menuId, int parentId = 0);
-        void AddModule(int menuId, ModuleType type, int parentId = 0);
+        int AddModule(int menuId, ModuleType type, int parentId = 0);
     }
 
     public class ModulesManager : IModulesManager
@@ -71,8 +71,10 @@ namespace WebformsCms.Src
             }
         }
 
-        public void AddModule(int menuId, ModuleType type, int parentId = 0)
+        public int AddModule(int menuId, ModuleType type, int parentId = 0)
         {
+            int newId;
+
             var module = new Domain.Modules()
             {
                 MenuId = menuId,
@@ -88,10 +90,11 @@ namespace WebformsCms.Src
             {
                 var modulesRepo = new ModulesRepository(session.UnitOfWork);
 
-                modulesRepo.Save(module);
+                newId = modulesRepo.Save(module);
             }
-
+            return newId;
         }
+
 
         public List<ModuleUserControl> GetMenuModules(int menuId, int parentId = 0)
         {
@@ -113,8 +116,6 @@ namespace WebformsCms.Src
                 }
 
             }
-
-
             return controls;
         }
 

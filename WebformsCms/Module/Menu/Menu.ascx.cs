@@ -14,6 +14,11 @@ namespace WebformsCms.Module.Menu
 
             var data = manager.GetMenusByParentControlId(this.ID);
 
+            foreach(var menu in data)
+            {
+                if (menu.RelativeUrl == null) menu.RelativeUrl = "/";
+            }
+
             if (data.Count == 0)
             {
                 var c = (Client.MenuAdd)DefaultModuleFactory.GetControl(null, "~/Module/Client/MenuAdd.ascx");

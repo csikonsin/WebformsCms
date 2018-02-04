@@ -69,21 +69,10 @@ namespace WebformsCms.Module
         {
             if (!(e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)) return;
 
-            var ph = (PlaceHolder)e.Item.FindControl("ph");
-            var control = (ModuleUserControl)e.Item.DataItem;
+            var single = (SingleModule)e.Item.FindControl("singlemodule");
 
-            ph.Controls.Add(control);
-
-            if (!Authentication.Instance.IsAdminEdit() ||Root)
-            {
-                return;
-            }
-
-            var commands = (PlaceHolder)e.Item.FindControl("commands");
-
-            var c = (Client.ModuleEditAdd)DefaultModuleFactory.GetControl(null, "~/Module/Client/ModuleEditAdd.ascx");
-            c.Data = control.Data;
-            commands.Controls.Add(c);
+            single.Root = Root;
+            single.Control = (ModuleUserControl)e.Item.DataItem; 
         }
     }
 

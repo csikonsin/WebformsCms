@@ -3,14 +3,35 @@ import ReactDOM from "react-dom"
 import ModuleEditAdd from "./module-editadd.jsx"
 import CmsEditor from "./cms-editor.jsx"
 import MenuAdd from "./menu-add.jsx"
+import EventsEmitter from "./event-emitter"
 
- document.querySelectorAll(".module-editadd-root").forEach((element) => {    
-    var moduleId = element.getAttribute("data-moduleid");
-    var menuId = element.getAttribute("data-menuid");
-    var moduleType = element.getAttribute("data-moduletype");
-    var parentModuleId = element.getAttribute("data-parentmoduleid");
-    ReactDOM.render(<ModuleEditAdd moduleId={moduleId} menuId={menuId} moduleType={moduleType} parentModuleId={parentModuleId} />,element)
+
+
+let loadEditadd = function(loadNew){
+
+    var query = ".module-editadd-root";
+    if(loadNew){
+        query +=".notloaded";
+    }
+
+    document.querySelectorAll(query).forEach((element) => {    
+        var moduleId = element.getAttribute("data-moduleid");
+        var menuId = element.getAttribute("data-menuid");
+        var moduleType = element.getAttribute("data-moduletype");
+        var parentModuleId = element.getAttribute("data-parentmoduleid");
+        ReactDOM.render(<ModuleEditAdd moduleId={moduleId} menuId={menuId} moduleType={moduleType} parentModuleId={parentModuleId} />,element)
+
+        if(loadNew){
+            element.className = element.className.replace(" notloaded", "");
+        }
+    })
+}
+loadEditadd()
+
+ EventsEmitter.subscribe("load-new-editadd", function(){
+    loadEditadd(true)
  })
+ 
 
 
 

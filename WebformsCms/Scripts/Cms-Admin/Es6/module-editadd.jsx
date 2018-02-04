@@ -69,14 +69,18 @@ export default class ModuleEditAdd extends React.Component {
     }
 
     addModule(type, menuId, moduleId){
+
+        let instance = this;
+
         axios.post("/api/Modules.asmx/NewModule", {
             menuId: menuId,
             moduleType: type,
             parentId: moduleId
-        }).then(function(resp){
-            //this.wrapper.ownerDocument.location.reload();
+        }).then(function(resp){         
+            instance.wrapper.parentElement.insertAdjacentHTML("beforebegin", resp.data.d);
+            EventEmitter.dispatch("load-new-editadd");
         }).catch(function(error){
-            console.error("Error adding module!");
+            console.error("Error adding module!", error);
         })
 
     }

@@ -12,6 +12,16 @@ namespace WebformsCms.Module.Client
     {        
         protected void Page_Load(object sender, EventArgs e)
         {
+            InitializeAttributes();
+        }
+
+        public void InitializeAttributes(bool dynamicCreated = false)
+        {
+            if (dynamicCreated)
+            {
+                editadd.Attributes["class"] += " notloaded";
+            }
+
             editadd.Attributes["data-moduleid"] = Convert.ToString(Data.Id);
             editadd.Attributes["data-menuid"] = Convert.ToString(Data.MenuId);
             editadd.Attributes["data-moduletype"] = Convert.ToString(Data.ModuleType);
