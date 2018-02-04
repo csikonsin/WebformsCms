@@ -56,11 +56,11 @@ namespace WebformsCms
 
         private void AddScripts()
         {
+            AddScriptsBundle("~/bundles/cms");
             if (Authentication.Instance.IsAdminEdit())
             {
                 AddScriptsBundle("~/bundles/cms-admin");
             }
-            AddScriptsBundle("~/bundles/cms");
             AddScriptsBundle("~/bundles/modernizr");
         }
 
