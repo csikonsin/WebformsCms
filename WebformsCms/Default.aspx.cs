@@ -59,7 +59,13 @@ namespace WebformsCms
             AddScriptsBundle("~/bundles/cms");
             if (Authentication.Instance.IsAdmin)
             {
-                AddScriptsBundle("~/bundles/cms-admin");
+                if (Request.IsLocal)
+                {
+                    DynamicScripts.Controls.Add(new Literal() { Text = "<script src='http://localhost:9000/bundle.js'></script>" });
+                }else
+                {
+                    AddScriptsBundle("~/bundles/cms-admin");
+                }
             }
             AddScriptsBundle("~/bundles/modernizr");
         }
@@ -104,6 +110,7 @@ namespace WebformsCms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Form1.Action = Request.RawUrl;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

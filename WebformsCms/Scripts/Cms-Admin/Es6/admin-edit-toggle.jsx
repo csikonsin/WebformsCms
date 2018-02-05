@@ -4,7 +4,6 @@ export default class AdminEditToggle extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-
         }
     }
 
@@ -12,7 +11,7 @@ export default class AdminEditToggle extends React.Component{
         var wrapperClass ="wrapper";
         if(this.props.isEdit){
             wrapperClass += " active"
-        }
+        }  
 
         return (
             <div className={wrapperClass} onClick={this.handleToggle.bind(this)}>

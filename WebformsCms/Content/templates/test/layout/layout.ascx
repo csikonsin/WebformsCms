@@ -6,5 +6,5 @@
         <a class="lg">LOGO</a>
         <nav><cms:menu runat="server" Id="main"/></nav>
     </header>
-    <main><cms:module runat="server" /></main>
+    <main><cms:module runat="server" Id="Modules" /></main>
 </div>

@@ -44,5 +44,5 @@ loadEditadd()
 ReactDOM.render(<CmsEditor/>, document.getElementById("module-editor-root"))
 
 var editRoot = document.getElementById("admin-edit-toggle-root");
-var isEdit = (editRoot.getAttribute("data-isedit").toLowerCase() == "true");
+var isEdit = (editRoot.getAttribute("data-isedit").toLowerCase() === "true");
 ReactDOM.render(<AdminEditToggle isEdit={isEdit}/>, editRoot)

@@ -112,9 +112,10 @@ namespace WebformsCms.Api
                     var repo = new Data.ModulesRepository(session.UnitOfWork);
                     module = repo.GetSingle(moduleId);
                 }
-                var control = DefaultModuleFactory.GetControlFromModuleData(module);
 
-                var single = (Module.SingleModule)DefaultModuleFactory.GetControl(module, "~/Module/SingleModule.ascx");
+                var control = ModulesManager.GetControlFromModuleData(module);
+
+                var single = (Module.SingleModule)new DefaultModuleFactory("~/Module/SingleModule.ascx").GetControl(module);
 
                 single.Control = control;
 

@@ -7,6 +7,6 @@
         </ul>
     </LayoutTemplate>
     <ItemTemplate>
-        <li><a href="<%#Eval("RelativeUrl") %>"><%#Eval("Name") %></a><asp:PlaceHolder runat="server" ID="anchorPh" /></li>
+        <li><a href="<%#Eval("Url") %>"><%#Eval("Name") %></a><asp:PlaceHolder runat="server" ID="anchorPh" /></li>
     </ItemTemplate>
 </asp:ListView>

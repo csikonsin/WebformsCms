@@ -247,6 +247,7 @@
     <Content Include="Module\Heading\Heading.ascx" />
     <Content Include="Module\Image\Image.ascx" />
     <Content Include="Module\Login\Login.ascx" />
+    <Content Include="Module\Login\Logout.ascx" />
     <Content Include="Module\Menu\Menu.ascx" />
     <Content Include="Module\Register\Register.ascx" />
     <Content Include="Module\SingleModule.ascx" />
@@ -255,11 +256,16 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\Cms-Admin\bundle.js" />
     <Content Include="Scripts\Cms-Admin\common.js" />
+    <Content Include="Scripts\Cms-Admin\Es6\admin-edit-toggle.jsx" />
+    <Content Include="Scripts\Cms-Admin\Es6\cms-editor.jsx" />
     <Content Include="Scripts\Cms-Admin\Es6\event-emitter.js" />
+    <Content Include="Scripts\Cms-Admin\Es6\menu-add.jsx" />
+    <Content Include="Scripts\Cms-Admin\Es6\menu-editor.jsx" />
+    <Content Include="Scripts\Cms-Admin\Es6\module-editadd.jsx" />
     <Content Include="Scripts\Cms\common.js" />
     <Content Include="Scripts\Cms-Admin\Es6\index.js" />
-    <Content Include="Scripts\Cms-Admin\Es6\module-add.jsx" />
     <Content Include="Scripts\Cms-Admin\Es6\module-editor.jsx" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -490,6 +496,13 @@
     </Compile>
     <Compile Include="Module\Login\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\Login\Logout.ascx.cs">
+      <DependentUpon>Logout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\Login\Logout.ascx.designer.cs">
+      <DependentUpon>Logout.ascx</DependentUpon>
     </Compile>
     <Compile Include="Module\Menu\Menu.ascx.cs">
       <DependentUpon>Menu.ascx</DependentUpon>

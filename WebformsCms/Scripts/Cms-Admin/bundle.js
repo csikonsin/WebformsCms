@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,7 +70,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(17);
+var bind = __webpack_require__(18);
 var isBuffer = __webpack_require__(39);
 
 /*global toString:true*/
@@ -571,9 +571,9 @@ process.umask = function() { return 0; };
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(24);
-} else {
   module.exports = __webpack_require__(25);
+} else {
+  module.exports = __webpack_require__(26);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -622,6 +622,34 @@ module.exports = emptyFunction;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+// any object can just extends EventEmitter to have access to `this.subscribe` and `this.dispatch`
+var EventEmitter = {
+    _events: {},
+    dispatch: function dispatch(event, data) {
+        if (!this._events[event]) return; // no one is listening to this event
+        for (var i = 0; i < this._events[event].length; i++) {
+            this._events[event][i](data);
+        }
+    },
+    subscribe: function subscribe(event, callback) {
+        if (!this._events[event]) this._events[event] = []; // new event
+        this._events[event].push(callback);
+    }
+    // note that we do not handle unsubscribe here
+};
+
+exports.default = EventEmitter;
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -718,7 +746,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -742,7 +770,13 @@ module.exports = emptyObject;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 6 */
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(38);
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -802,7 +836,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -871,7 +905,7 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -894,10 +928,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(18);
+    adapter = __webpack_require__(19);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(18);
+    adapter = __webpack_require__(19);
   }
   return adapter;
 }
@@ -971,7 +1005,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -985,9 +1019,9 @@ module.exports = defaults;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(6);
-  var warning = __webpack_require__(7);
-  var ReactPropTypesSecret = __webpack_require__(26);
+  var invariant = __webpack_require__(8);
+  var warning = __webpack_require__(9);
+  var ReactPropTypesSecret = __webpack_require__(27);
   var loggedTypeFailures = {};
 }
 
@@ -1038,7 +1072,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1077,7 +1111,7 @@ var ExecutionEnvironment = {
 module.exports = ExecutionEnvironment;
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1158,7 +1192,7 @@ module.exports = EventListener;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1200,7 +1234,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 module.exports = getActiveElement;
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1271,7 +1305,7 @@ function shallowEqual(objA, objB) {
 module.exports = shallowEqual;
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1286,7 +1320,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(29);
+var isTextNode = __webpack_require__(30);
 
 /*eslint-disable no-bitwise */
 
@@ -1314,7 +1348,7 @@ function containsNode(outerNode, innerNode) {
 module.exports = containsNode;
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1344,35 +1378,7 @@ function focusNode(node) {
 module.exports = focusNode;
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-// any object can just extends EventEmitter to have access to `this.subscribe` and `this.dispatch`
-var EventEmitter = {
-    _events: {},
-    dispatch: function dispatch(event, data) {
-        if (!this._events[event]) return; // no one is listening to this event
-        for (var i = 0; i < this._events[event].length; i++) {
-            this._events[event][i](data);
-        }
-    },
-    subscribe: function subscribe(event, callback) {
-        if (!this._events[event]) this._events[event] = []; // new event
-        this._events[event].push(callback);
-    }
-    // note that we do not handle unsubscribe here
-};
-
-exports.default = EventEmitter;
-
-/***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1390,7 +1396,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1401,7 +1407,7 @@ var settle = __webpack_require__(42);
 var buildURL = __webpack_require__(44);
 var parseHeaders = __webpack_require__(45);
 var isURLSameOrigin = __webpack_require__(46);
-var createError = __webpack_require__(19);
+var createError = __webpack_require__(20);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(47);
 
 module.exports = function xhrAdapter(config) {
@@ -1578,7 +1584,7 @@ module.exports = function xhrAdapter(config) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1603,7 +1609,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1615,7 +1621,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1641,14 +1647,14 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(23);
+module.exports = __webpack_require__(24);
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1658,11 +1664,11 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(27);
+var _reactDom = __webpack_require__(28);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _moduleEditadd = __webpack_require__(61);
+var _moduleEditadd = __webpack_require__(37);
 
 var _moduleEditadd2 = _interopRequireDefault(_moduleEditadd);
 
@@ -1670,15 +1676,15 @@ var _cmsEditor = __webpack_require__(56);
 
 var _cmsEditor2 = _interopRequireDefault(_cmsEditor);
 
-var _menuAdd = __webpack_require__(57);
+var _menuAdd = __webpack_require__(59);
 
 var _menuAdd2 = _interopRequireDefault(_menuAdd);
 
-var _eventEmitter = __webpack_require__(16);
+var _eventEmitter = __webpack_require__(4);
 
 var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
 
-var _adminEditToggle = __webpack_require__(62);
+var _adminEditToggle = __webpack_require__(60);
 
 var _adminEditToggle2 = _interopRequireDefault(_adminEditToggle);
 
@@ -1722,7 +1728,7 @@ var isEdit = editRoot.getAttribute("data-isedit").toLowerCase() == "true";
 _reactDom2.default.render(_react2.default.createElement(_adminEditToggle2.default, { isEdit: isEdit }), editRoot);
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1735,7 +1741,7 @@ _reactDom2.default.render(_react2.default.createElement(_adminEditToggle2.defaul
  * LICENSE file in the root directory of this source tree.
  */
 
-var m=__webpack_require__(4),n=__webpack_require__(5),p=__webpack_require__(3),q="function"===typeof Symbol&&Symbol["for"],r=q?Symbol["for"]("react.element"):60103,t=q?Symbol["for"]("react.call"):60104,u=q?Symbol["for"]("react.return"):60105,v=q?Symbol["for"]("react.portal"):60106,w=q?Symbol["for"]("react.fragment"):60107,x="function"===typeof Symbol&&Symbol.iterator;
+var m=__webpack_require__(5),n=__webpack_require__(6),p=__webpack_require__(3),q="function"===typeof Symbol&&Symbol["for"],r=q?Symbol["for"]("react.element"):60103,t=q?Symbol["for"]("react.call"):60104,u=q?Symbol["for"]("react.return"):60105,v=q?Symbol["for"]("react.portal"):60106,w=q?Symbol["for"]("react.fragment"):60107,x="function"===typeof Symbol&&Symbol.iterator;
 function y(a){for(var b=arguments.length-1,e="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);b=Error(e+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var z={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function A(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}A.prototype.isReactComponent={};A.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?y("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};A.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function B(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}function C(){}C.prototype=A.prototype;var D=B.prototype=new C;D.constructor=B;m(D,A.prototype);D.isPureReactComponent=!0;function E(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}var F=E.prototype=new C;F.constructor=E;m(F,A.prototype);F.unstable_isAsyncReactComponent=!0;F.render=function(){return this.props.children};var G={current:null},H=Object.prototype.hasOwnProperty,I={key:!0,ref:!0,__self:!0,__source:!0};
@@ -1750,7 +1756,7 @@ isValidElement:K,version:"16.2.0",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_F
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1771,12 +1777,12 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(4);
-var emptyObject = __webpack_require__(5);
-var invariant = __webpack_require__(6);
-var warning = __webpack_require__(7);
+var _assign = __webpack_require__(5);
+var emptyObject = __webpack_require__(6);
+var invariant = __webpack_require__(8);
+var warning = __webpack_require__(9);
 var emptyFunction = __webpack_require__(3);
-var checkPropTypes = __webpack_require__(9);
+var checkPropTypes = __webpack_require__(11);
 
 // TODO: this is special because it gets imported during build.
 
@@ -3115,7 +3121,7 @@ module.exports = react;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3134,7 +3140,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3172,15 +3178,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(28);
+  module.exports = __webpack_require__(29);
 } else {
-  module.exports = __webpack_require__(31);
+  module.exports = __webpack_require__(32);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3196,7 +3202,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(2),l=__webpack_require__(10),B=__webpack_require__(4),C=__webpack_require__(3),ba=__webpack_require__(11),da=__webpack_require__(12),ea=__webpack_require__(13),fa=__webpack_require__(14),ia=__webpack_require__(15),D=__webpack_require__(5);
+var aa=__webpack_require__(2),l=__webpack_require__(12),B=__webpack_require__(5),C=__webpack_require__(3),ba=__webpack_require__(13),da=__webpack_require__(14),ea=__webpack_require__(15),fa=__webpack_require__(16),ia=__webpack_require__(17),D=__webpack_require__(6);
 function E(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:E("227");
 var oa={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function pa(a,b){return(a&b)===b}
 var ta={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=ta,c=a.Properties||{},d=a.DOMAttributeNamespaces||{},e=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in c){ua.hasOwnProperty(f)?E("48",f):void 0;var g=f.toLowerCase(),h=c[f];g={attributeName:g,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:pa(h,b.MUST_USE_PROPERTY),
@@ -3416,7 +3422,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3431,7 +3437,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
  * @typechecks
  */
 
-var isNode = __webpack_require__(30);
+var isNode = __webpack_require__(31);
 
 /**
  * @param {*} object The object to check.
@@ -3444,7 +3450,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3472,7 +3478,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3494,20 +3500,20 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var React = __webpack_require__(2);
-var invariant = __webpack_require__(6);
-var warning = __webpack_require__(7);
-var ExecutionEnvironment = __webpack_require__(10);
-var _assign = __webpack_require__(4);
+var invariant = __webpack_require__(8);
+var warning = __webpack_require__(9);
+var ExecutionEnvironment = __webpack_require__(12);
+var _assign = __webpack_require__(5);
 var emptyFunction = __webpack_require__(3);
-var EventListener = __webpack_require__(11);
-var getActiveElement = __webpack_require__(12);
-var shallowEqual = __webpack_require__(13);
-var containsNode = __webpack_require__(14);
-var focusNode = __webpack_require__(15);
-var emptyObject = __webpack_require__(5);
-var checkPropTypes = __webpack_require__(9);
-var hyphenateStyleName = __webpack_require__(32);
-var camelizeStyleName = __webpack_require__(34);
+var EventListener = __webpack_require__(13);
+var getActiveElement = __webpack_require__(14);
+var shallowEqual = __webpack_require__(15);
+var containsNode = __webpack_require__(16);
+var focusNode = __webpack_require__(17);
+var emptyObject = __webpack_require__(6);
+var checkPropTypes = __webpack_require__(11);
+var hyphenateStyleName = __webpack_require__(33);
+var camelizeStyleName = __webpack_require__(35);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -18874,7 +18880,7 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18889,7 +18895,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(33);
+var hyphenate = __webpack_require__(34);
 
 var msPattern = /^ms-/;
 
@@ -18916,7 +18922,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18952,7 +18958,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18967,7 +18973,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(35);
+var camelize = __webpack_require__(36);
 
 var msPattern = /^-ms-/;
 
@@ -18995,7 +19001,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19030,11 +19036,186 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 36 */,
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(38);
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _eventEmitter = __webpack_require__(4);
+
+var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
+
+var _axios = __webpack_require__(7);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ModuleEditAdd = function (_React$Component) {
+    _inherits(ModuleEditAdd, _React$Component);
+
+    function ModuleEditAdd(props) {
+        _classCallCheck(this, ModuleEditAdd);
+
+        var _this = _possibleConstructorReturn(this, (ModuleEditAdd.__proto__ || Object.getPrototypeOf(ModuleEditAdd)).call(this, props));
+
+        var instance = _this;
+        _eventEmitter2.default.subscribe("add-module", function (_ref) {
+            var caller = _ref.caller,
+                type = _ref.type,
+                menuId = _ref.menuId,
+                moduleId = _ref.moduleId;
+
+            if (caller != instance) return;
+
+            instance.addModule(type, menuId, moduleId);
+        });
+
+        _eventEmitter2.default.subscribe("delete-module", function (_ref2) {
+            var caller = _ref2.caller,
+                menuId = _ref2.menuId,
+                moduleId = _ref2.moduleId;
+
+            if (caller != instance) return;
+
+            instance.deleteModule(menuId, moduleId);
+        });
+
+        _this.state = {
+            newModule: null,
+            deleted: false
+        };
+        return _this;
+    }
+
+    _createClass(ModuleEditAdd, [{
+        key: "render",
+        value: function render() {
+            var _this2 = this;
+
+            var type;
+
+            if (this.props.moduleId == 0) {
+                type = _react2.default.createElement(
+                    "a",
+                    { className: "button add-modoule", onClick: this.handleOpen.bind(this) },
+                    "Neues Modul hinzuf\xFCgen"
+                );
+            } else {
+                type = _react2.default.createElement(
+                    "div",
+                    { className: "editdel-module" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "wrapper" },
+                        _react2.default.createElement(
+                            "a",
+                            { className: "button edit-modoule", onClick: this.handleEdit.bind(this) },
+                            "Bearbeiten"
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { className: "button del-module", onClick: this.handleDelete.bind(this) },
+                            "L\xF6schen"
+                        )
+                    )
+                );
+            }
+
+            var display = _react2.default.createElement(
+                "div",
+                { className: "wrapper", ref: function ref(wrapper) {
+                        return _this2.wrapper = wrapper;
+                    } },
+                type
+            );
+            if (this.state.deleted) display = null;
+            return display;
+        }
+    }, {
+        key: "handleEdit",
+        value: function handleEdit() {
+            this.handleOpen({
+                isEdit: true
+            });
+        }
+    }, {
+        key: "handleDelete",
+        value: function handleDelete() {
+            this.handleOpen({
+                isDelete: true
+            });
+        }
+    }, {
+        key: "handleOpen",
+        value: function handleOpen(_ref3) {
+            var isDelete = _ref3.isDelete,
+                isEdit = _ref3.isEdit;
+
+            _eventEmitter2.default.dispatch("open-add-module", {
+                caller: this,
+                menuId: this.props.menuId,
+                moduleId: this.props.moduleId,
+                isEdit: isEdit,
+                isDelete: isDelete
+            });
+        }
+    }, {
+        key: "addModule",
+        value: function addModule(type, menuId, moduleId) {
+
+            var instance = this;
+
+            _axios2.default.post("/api/Modules.asmx/NewModule", {
+                menuId: menuId,
+                moduleType: type,
+                parentId: moduleId
+            }).then(function (resp) {
+                instance.wrapper.parentElement.insertAdjacentHTML("beforebegin", resp.data.d);
+                _eventEmitter2.default.dispatch("load-new-editadd");
+            }).catch(function (error) {
+                console.error("Error adding module!", error);
+            });
+        }
+    }, {
+        key: "deleteModule",
+        value: function deleteModule(menuId, moduleId) {
+            var _this3 = this;
+
+            _axios2.default.post("/Api/Modules.asmx/DeleteModule", {
+                menuId: this.props.menuId,
+                moduleId: this.props.moduleId
+            }).then(function (r) {
+                _this3.wrapper.parentElement.previousSibling.remove();
+                _this3.setState({ deleted: true });
+                _eventEmitter2.default.dispatch("close-editor", null);
+            }).catch(function (e) {
+                console.error(e);
+            });
+        }
+    }]);
+
+    return ModuleEditAdd;
+}(_react2.default.Component);
+
+exports.default = ModuleEditAdd;
 
 /***/ }),
 /* 38 */
@@ -19044,9 +19225,9 @@ module.exports = __webpack_require__(38);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(17);
+var bind = __webpack_require__(18);
 var Axios = __webpack_require__(40);
-var defaults = __webpack_require__(8);
+var defaults = __webpack_require__(10);
 
 /**
  * Create an instance of Axios
@@ -19079,9 +19260,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(21);
+axios.Cancel = __webpack_require__(22);
 axios.CancelToken = __webpack_require__(54);
-axios.isCancel = __webpack_require__(20);
+axios.isCancel = __webpack_require__(21);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -19129,7 +19310,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(8);
+var defaults = __webpack_require__(10);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(49);
 var dispatchRequest = __webpack_require__(50);
@@ -19234,7 +19415,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(19);
+var createError = __webpack_require__(20);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -19669,8 +19850,8 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(51);
-var isCancel = __webpack_require__(20);
-var defaults = __webpack_require__(8);
+var isCancel = __webpack_require__(21);
+var defaults = __webpack_require__(10);
 var isAbsoluteURL = __webpack_require__(52);
 var combineURLs = __webpack_require__(53);
 
@@ -19829,7 +20010,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(21);
+var Cancel = __webpack_require__(22);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -19937,15 +20118,15 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _eventEmitter = __webpack_require__(16);
+var _eventEmitter = __webpack_require__(4);
 
 var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
 
-var _menuEditor = __webpack_require__(58);
+var _menuEditor = __webpack_require__(57);
 
 var _menuEditor2 = _interopRequireDefault(_menuEditor);
 
-var _moduleEditor = __webpack_require__(59);
+var _moduleEditor = __webpack_require__(58);
 
 var _moduleEditor2 = _interopRequireDefault(_moduleEditor);
 
@@ -20070,81 +20251,11 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _eventEmitter = __webpack_require__(16);
+var _eventEmitter = __webpack_require__(4);
 
 var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MenuAdd = function (_React$Component) {
-    _inherits(MenuAdd, _React$Component);
-
-    function MenuAdd(props) {
-        _classCallCheck(this, MenuAdd);
-
-        var _this = _possibleConstructorReturn(this, (MenuAdd.__proto__ || Object.getPrototypeOf(MenuAdd)).call(this, props));
-
-        _this.state = {};
-        return _this;
-    }
-
-    _createClass(MenuAdd, [{
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "div",
-                { className: "wrapper" },
-                _react2.default.createElement(
-                    "div",
-                    { className: "button add-menu", onClick: this.addMenu.bind(this) },
-                    "Neuen Men\xFCpunkt hinzuf\xFCgen"
-                )
-            );
-        }
-    }, {
-        key: "addMenu",
-        value: function addMenu() {
-            _eventEmitter2.default.dispatch("open-add-menu", {
-                caller: this,
-                parentControlId: this.props.parentControlId,
-                parentMenuId: this.props.parentMenuId
-            });
-        }
-    }]);
-
-    return MenuAdd;
-}(_react2.default.Component);
-
-exports.default = MenuAdd;
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(2);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _eventEmitter = __webpack_require__(16);
-
-var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
-
-var _axios = __webpack_require__(37);
+var _axios = __webpack_require__(7);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -20277,7 +20388,7 @@ var MenuEditor = function (_React$Component) {
 exports.default = MenuEditor;
 
 /***/ }),
-/* 59 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20293,11 +20404,11 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _eventEmitter = __webpack_require__(16);
+var _eventEmitter = __webpack_require__(4);
 
 var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
 
-var _axios = __webpack_require__(37);
+var _axios = __webpack_require__(7);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -20487,8 +20598,7 @@ var ModuleEditor = function (_React$Component2) {
 exports.default = ModuleEditor;
 
 /***/ }),
-/* 60 */,
-/* 61 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20504,13 +20614,9 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _eventEmitter = __webpack_require__(16);
+var _eventEmitter = __webpack_require__(4);
 
 var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
-
-var _axios = __webpack_require__(37);
-
-var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20520,157 +20626,49 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ModuleEditAdd = function (_React$Component) {
-    _inherits(ModuleEditAdd, _React$Component);
+var MenuAdd = function (_React$Component) {
+    _inherits(MenuAdd, _React$Component);
 
-    function ModuleEditAdd(props) {
-        _classCallCheck(this, ModuleEditAdd);
+    function MenuAdd(props) {
+        _classCallCheck(this, MenuAdd);
 
-        var _this = _possibleConstructorReturn(this, (ModuleEditAdd.__proto__ || Object.getPrototypeOf(ModuleEditAdd)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (MenuAdd.__proto__ || Object.getPrototypeOf(MenuAdd)).call(this, props));
 
-        var instance = _this;
-        _eventEmitter2.default.subscribe("add-module", function (_ref) {
-            var caller = _ref.caller,
-                type = _ref.type,
-                menuId = _ref.menuId,
-                moduleId = _ref.moduleId;
-
-            if (caller != instance) return;
-
-            instance.addModule(type, menuId, moduleId);
-        });
-
-        _eventEmitter2.default.subscribe("delete-module", function (_ref2) {
-            var caller = _ref2.caller,
-                menuId = _ref2.menuId,
-                moduleId = _ref2.moduleId;
-
-            if (caller != instance) return;
-
-            instance.deleteModule(menuId, moduleId);
-        });
-
-        _this.state = {
-            newModule: null,
-            deleted: false
-        };
+        _this.state = {};
         return _this;
     }
 
-    _createClass(ModuleEditAdd, [{
+    _createClass(MenuAdd, [{
         key: "render",
         value: function render() {
-            var _this2 = this;
-
-            var type;
-
-            if (this.props.moduleId == 0) {
-                type = _react2.default.createElement(
-                    "a",
-                    { className: "button add-modoule", onClick: this.handleOpen.bind(this) },
-                    "Neues Modul hinzuf\xFCgen"
-                );
-            } else {
-                type = _react2.default.createElement(
-                    "div",
-                    { className: "editdel-module" },
-                    _react2.default.createElement(
-                        "div",
-                        { className: "wrapper" },
-                        _react2.default.createElement(
-                            "a",
-                            { className: "button edit-modoule", onClick: this.handleEdit.bind(this) },
-                            "Bearbeiten"
-                        ),
-                        _react2.default.createElement(
-                            "a",
-                            { className: "button del-module", onClick: this.handleDelete.bind(this) },
-                            "L\xF6schen"
-                        )
-                    )
-                );
-            }
-
-            var display = _react2.default.createElement(
+            return _react2.default.createElement(
                 "div",
-                { className: "wrapper", ref: function ref(wrapper) {
-                        return _this2.wrapper = wrapper;
-                    } },
-                type
+                { className: "wrapper" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "button add-menu", onClick: this.addMenu.bind(this) },
+                    "Neuen Men\xFCpunkt hinzuf\xFCgen"
+                )
             );
-            if (this.state.deleted) display = null;
-            return display;
         }
     }, {
-        key: "handleEdit",
-        value: function handleEdit() {
-            this.handleOpen({
-                isEdit: true
-            });
-        }
-    }, {
-        key: "handleDelete",
-        value: function handleDelete() {
-            this.handleOpen({
-                isDelete: true
-            });
-        }
-    }, {
-        key: "handleOpen",
-        value: function handleOpen(_ref3) {
-            var isDelete = _ref3.isDelete,
-                isEdit = _ref3.isEdit;
-
-            _eventEmitter2.default.dispatch("open-add-module", {
+        key: "addMenu",
+        value: function addMenu() {
+            _eventEmitter2.default.dispatch("open-add-menu", {
                 caller: this,
-                menuId: this.props.menuId,
-                moduleId: this.props.moduleId,
-                isEdit: isEdit,
-                isDelete: isDelete
-            });
-        }
-    }, {
-        key: "addModule",
-        value: function addModule(type, menuId, moduleId) {
-
-            var instance = this;
-
-            _axios2.default.post("/api/Modules.asmx/NewModule", {
-                menuId: menuId,
-                moduleType: type,
-                parentId: moduleId
-            }).then(function (resp) {
-                instance.wrapper.parentElement.insertAdjacentHTML("beforebegin", resp.data.d);
-                _eventEmitter2.default.dispatch("load-new-editadd");
-            }).catch(function (error) {
-                console.error("Error adding module!", error);
-            });
-        }
-    }, {
-        key: "deleteModule",
-        value: function deleteModule(menuId, moduleId) {
-            var _this3 = this;
-
-            _axios2.default.post("/Api/Modules.asmx/DeleteModule", {
-                menuId: this.props.menuId,
-                moduleId: this.props.moduleId
-            }).then(function (r) {
-                _this3.wrapper.parentElement.previousSibling.remove();
-                _this3.setState({ deleted: true });
-                _eventEmitter2.default.dispatch("close-editor", null);
-            }).catch(function (e) {
-                console.error(e);
+                parentControlId: this.props.parentControlId,
+                parentMenuId: this.props.parentMenuId
             });
         }
     }]);
 
-    return ModuleEditAdd;
+    return MenuAdd;
 }(_react2.default.Component);
 
-exports.default = ModuleEditAdd;
+exports.default = MenuAdd;
 
 /***/ }),
-/* 62 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20686,7 +20684,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(37);
+var _axios = __webpack_require__(7);
 
 var _axios2 = _interopRequireDefault(_axios);
 

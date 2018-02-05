@@ -15,6 +15,7 @@ namespace WebformsCms.Module
 
         public override void Initialize(bool serverRendering = false)
         {
+            //no id needed
             ph.Controls.Add(Control);
 
             if (!Authentication.Instance.IsAdminEdit || Root)
@@ -22,7 +23,7 @@ namespace WebformsCms.Module
                 return;
             }
 
-            var c = (Client.ModuleEditAdd)DefaultModuleFactory.GetControl(null, "~/Module/Client/ModuleEditAdd.ascx");
+            var c = (Client.ModuleEditAdd)new DefaultModuleFactory("~/Module/Client/ModuleEditAdd.ascx").GetControl(null);
             c.Data = Control.Data;
             commands.Controls.Add(c);
         }

@@ -54,7 +54,7 @@
     </div>
     <div class="form-group">
         <div class="col">
-            <asp:Button runat="server" OnClick="Register_Click" Text="Register" CssClass="button" />
+            <asp:Button runat="server" OnClick="Register_Click" Text="Register" CssClass="button" ID="RegisterBtn" />
         </div>
     </div>
 </fieldset>

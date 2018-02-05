@@ -41,6 +41,14 @@ namespace WebformsCms.Src
             }
         }
 
+        public static bool UseFriendlyUrls
+        {
+            get
+            {
+                return Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["UseFriendlyUrls"]) == 1;
+            }
+        }
+
 
 
     }

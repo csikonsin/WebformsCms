@@ -16,8 +16,11 @@ namespace WebformsCms.Src
         Heading = 1,
         Image = 2,
         Login = 3,
-        Register = 4
+        Register = 4,
+        Logout = 5
     }
+
+
 
 
     public interface IModulesManager
@@ -42,6 +45,41 @@ namespace WebformsCms.Src
 
             return types;
         }
+
+
+        public static ModuleUserControl GetControlFromModuleData(Domain.Modules module)
+        {
+            var moduleType = (ModuleType)module.ModuleType;
+
+            IModuleFactory<ModuleUserControl> factory = null;
+
+            switch (moduleType)
+            {
+                case ModuleType.Text:
+                    factory = new TextFactory();
+                    break;
+                case ModuleType.Heading:
+                    factory = new HeadingFactory();
+                    break;
+                case ModuleType.Image:
+                    factory = new ImageFactory();
+                    break;
+                case ModuleType.Login:
+                    factory = new LoginFactory();
+                    break;
+                case ModuleType.Register:
+                    factory = new RegisterFactory();
+                    break;
+                case ModuleType.Logout:
+                    factory = new DefaultModuleFactory("~/Module/Login/Logout.ascx");
+                    break;
+                default:                    
+                    throw new Exception("Unkown module type!");
+            }
+
+            return factory?.GetControl(module);
+        }
+
 
         private int GetNextPosition(int menuId, int parentId)
         {
@@ -126,12 +164,14 @@ namespace WebformsCms.Src
 
                 var modules = modulesRepo.GetMenuModules(menuId);
 
+                int index = 0;
                 foreach (var module in modules)
                 {
                     int moduleParentId = 0;
                     int.TryParse(Convert.ToString(module.ParentId), out moduleParentId);
                     if (moduleParentId != parentId) continue;
-                    var control = DefaultModuleFactory.GetControlFromModuleData(module);
+                    var control = GetControlFromModuleData(module);
+                    control.ID = control.GetType().Name + "_index";
                     if (control != null) controls.Add(control);
                 }
             }

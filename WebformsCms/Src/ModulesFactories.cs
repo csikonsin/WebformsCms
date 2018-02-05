@@ -17,9 +17,15 @@ namespace WebformsCms.Src
         T GetControl(Domain.Modules module);
     }
 
-    public static class DefaultModuleFactory
+    public  class DefaultModuleFactory : IModuleFactory<ModuleUserControl>
     {
-        public static ModuleUserControl GetControl(Domain.Modules module, string virtualPath)
+        private string virtualPath;
+        public DefaultModuleFactory(string virtualPath)
+        {
+            this.virtualPath = virtualPath;
+        }
+
+        public ModuleUserControl GetControl(Domain.Modules module)
         {
             var userControl = new UserControl();
             var control = (ModuleUserControl)userControl.LoadControl(virtualPath);
@@ -27,35 +33,6 @@ namespace WebformsCms.Src
             return control;
         }
 
-        public static ModuleUserControl GetControlFromModuleData(Domain.Modules module)
-        {
-            var moduleType = (ModuleType)module.ModuleType;
-
-            IModuleFactory<ModuleUserControl> factory = null;
-
-            switch (moduleType)
-            {
-                case ModuleType.Text:
-                    factory = new TextFactory();
-                    break;
-                case ModuleType.Heading:
-                    factory = new HeadingFactory();
-                    break;
-                case ModuleType.Image:
-                    factory = new ImageFactory();
-                    break;
-                case ModuleType.Login:
-                    factory = new LoginFactory();
-                    break;
-                case ModuleType.Register:
-                    factory = new RegisterFactory();
-                    break;
-                default:
-                    throw new Exception("Unkown module type!");
-            }
-
-            return factory?.GetControl(module);
-        }
     }
 
     public class HeadingFactory : IModuleFactory<Heading>
@@ -112,4 +89,5 @@ namespace WebformsCms.Src
             return control;
         }
     }
+
 }

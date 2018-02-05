@@ -20,5 +20,14 @@ namespace WebformsCms.Content.templates.layout {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::WebformsCms.Module.Menu.Menu main;
+        
+        /// <summary>
+        /// Modules control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebformsCms.Module.Module Modules;
     }
 }

@@ -17,22 +17,33 @@ namespace WebformsCms.Module
 
         public int ModuleId = 0;
 
+
+
         protected void Page_Load(object sender, EventArgs e)
+        {
+            LoadModules();
+        }
+
+        private void LoadModules()
         {
             var repData = new List<ModuleUserControl>();
             repModules.ItemDataBound += RepModules_ItemDataBound;
 
             if (Root)
             {
-                var c = (ModuleUserControl)LoadControl($"~/Content/templates/{WebSettings.Instance.Settings.Name}/layout/layout.ascx");
+                var c = new DefaultModuleFactory($"~/Content/templates/{WebSettings.Instance.Settings.Name}/layout/layout.ascx").GetControl(null);
+                c.ID = "Layout";
                 repData.Add(c);
-                Cms.Controls.Add(DefaultModuleFactory.GetControl(null, "~/Module/Client/ModuleEditor.ascx"));
+
+                var editor = new DefaultModuleFactory("~/Module/Client/ModuleEditor.ascx").GetControl(null);
+                Cms.Controls.Add(editor);
                 repModules.DataSource = repData;
                 repModules.DataBind();
 
                 if (Authentication.IsAdmin)
                 {
-                    Cms.Controls.Add((Client.AdminEditToggle)DefaultModuleFactory.GetControl(null, "~/Module/Client/AdminEditToggle.ascx"));
+                    var toggle = (Client.AdminEditToggle)new DefaultModuleFactory("~/Module/Client/AdminEditToggle.ascx").GetControl(null);
+                    Cms.Controls.Add(toggle);
                 }
 
                 return;
@@ -56,12 +67,13 @@ namespace WebformsCms.Module
                 repData.Add(control);
             }
 
-         
+
 
             if (Authentication.Instance.IsAdminEdit)
             {
-                var c = (Client.ModuleEditAdd)DefaultModuleFactory.GetControl(null, "~/Module/Client/ModuleEditAdd.ascx");
-                c.Data = new Domain.Modules() {
+                var c = (Client.ModuleEditAdd)new DefaultModuleFactory("~/Module/Client/ModuleEditAdd.ascx").GetControl(null);
+                c.Data = new Domain.Modules()
+                {
                     MenuId = menuId
                 };
                 Add.Controls.Add(c);
@@ -70,6 +82,7 @@ namespace WebformsCms.Module
             repModules.DataSource = repData;
             repModules.DataBind();
         }
+
 
         private void RepModules_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {

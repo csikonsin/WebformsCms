@@ -31,7 +31,7 @@
     </div>
     <div class="form-group">
         <div class="col">
-            <asp:Button runat="server" OnClick="LogIn" Text="Log in" CssClass="button" />
+            <asp:Button runat="server" OnClick="LogIn" Text="Log in" CssClass="button" ID="LoginBtn" />
         </div>
     </div>
 </fieldset>

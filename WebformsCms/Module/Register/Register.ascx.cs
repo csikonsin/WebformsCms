@@ -39,8 +39,23 @@ namespace WebformsCms.Module.Register
                 //string code = manager.GenerateEmailConfirmationToken(user.Id);
                 //string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
                 //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
-
                 signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+
+                var userId = HttpContext.Current.User.Identity.GetUserId();
+
+                var newUser = new Domain.Users()
+                {
+                    Username = Context.User.Identity.Name,
+                    OwinId = userId,
+                    CreatedAt = DateTime.Now
+                };
+
+                using (var session = new Data.DataSession())
+                {
+                    var repo = new Data.UsersRepository(session.UnitOfWork);
+                    repo.Save(newUser);
+                }
+
                 IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
             }
             else

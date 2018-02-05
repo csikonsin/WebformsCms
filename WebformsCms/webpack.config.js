@@ -16,5 +16,10 @@ module.exports = {
             loader: "babel-loader"
         }
       ]
+  },
+  devServer: {
+      contentBase: "./Scripts/Cms-Admin/",
+      host: "localhost",
+      port: 9000
   }
 }

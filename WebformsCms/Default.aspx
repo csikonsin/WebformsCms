@@ -10,7 +10,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
 <body>
-    <form runat="server">
+    <form runat="server" id="Form1" action="Default.aspx">
 <%--        <asp:ScriptManager runat="server" id="ScriptManager" >
             <Scripts>
                 <asp:ScriptReference Name="respond" />
@@ -25,7 +25,7 @@
                 <asp:ScriptReference Name="WebFormsBundle" />
             </Scripts>
         </asp:ScriptManager>--%>
-      <cms:module Root="true" runat="server" />
+      <cms:module Root="true" runat="server" ID="RootModule" />
     </form>
     <asp:PlaceHolder runat="server" id="DynamicScripts"/>
 </body>

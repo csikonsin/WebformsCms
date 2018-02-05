@@ -27,7 +27,7 @@ namespace WebformsCms
         {
             var rawUrl = HttpContext.Current.Request.RawUrl;
 
-            var ignoreRequests = new List<string> { "browserLink", "Default.aspx?menuid=" };
+            var ignoreRequests = new List<string> { "browserLink", "Default?menuid=","Default.aspx?menuid=" };
 
             for (int i = 0; i < ignoreRequests.Count; i++)
             {
@@ -40,7 +40,17 @@ namespace WebformsCms
             var manager = new Src.MenusManager();
 
             var rewrite = manager.RewriteRawUrl(rawUrl);
-            Context.RewritePath(rewrite);
+
+            if (rewrite == rawUrl) return;
+
+            if (Src.WebSettings.UseFriendlyUrls)
+            {
+                Context.RewritePath(rewrite);
+            }else
+            {
+                Context.Response.Redirect(rewrite);
+            }
+            
         }
     }
 }
